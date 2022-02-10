@@ -10,6 +10,9 @@ using namespace std;
 
 
 bool isPrime(int num){
+    if(num < 2){
+        return false;
+    }
     for(int i = 2; i<= num/2 + 1; i++){
         if (num % i == 0 && num!=2)
         {
@@ -20,7 +23,7 @@ bool isPrime(int num){
 }
 
 void primesInInterval(int start, int end, vector<int> *primes, int intervall){
-    for (int i = start; i < end; i+=intervall)
+    for (int i = start; i <= end; i+=intervall)
     {
         if (isPrime(i))
         {
@@ -29,31 +32,11 @@ void primesInInterval(int start, int end, vector<int> *primes, int intervall){
     }
 }
 
-void swap(int *xp, int *yp) 
-{ 
-    int temp = *xp; 
-    *xp = *yp; 
-    *yp = temp; 
-} 
-  
-// A function to implement bubble sort 
-void bubbleSort(int arr[], int n) 
-{ 
-    int i, j; 
-    for (i = 0; i < n-1; i++)     
-      
-    // Last i elements are already in place 
-    for (j = 0; j < n-i-1; j++) 
-        if (arr[j] > arr[j+1]) 
-            swap(&arr[j], &arr[j+1]); 
-} 
-
-
 int main(){
     
   
-    int start = 2;
-    int end = 100;
+    int start = -10;
+    int end = 101;
     int numberOfThreads = 3;
     vector<thread> threads;
     vector<int> arr[numberOfThreads];
@@ -83,14 +66,7 @@ int main(){
    }
    cout<<"Sum: " << sum << endl;
 
-    /*
-   for (int i = 0; i < numberOfThreads; i++)
-   {
-       for (int j = 0; j < arr[i].size();  j++)
-       {
-           primes.emplace_back(arr[i].at(j));
-       }
-   }*/
+ 
 
      //Combine all vectors into one
   for (int i = 0; i < numberOfThreads; i++){
