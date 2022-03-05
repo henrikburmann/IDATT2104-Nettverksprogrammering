@@ -1,0 +1,43 @@
+h1{
+    text-align: center;
+}
+.container{
+    display: grid;
+    width: 80%;
+    margin: auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "input output";
+}
+
+.input{
+    grid-area: input;
+    margin-right: 30px;
+}
+
+.output{
+    grid-area: output;
+    margin-right: 30px;
+}
+
+label{
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+textarea{
+    width: 100%;
+    height: 300px;
+    padding: 10px;
+}
+
+#submitButton{
+    width: 50%;
+    margin-left: 140px;
+    height: 25px;
+    
+}
+
+html{
+    background-color: antiquewhite;
+}
