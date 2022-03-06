@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CompilerController {
 
-    @PostMapping("/compile")
-    @CrossOrigin
-
+        @PostMapping("/compile")
+        @CrossOrigin
+        
 
 }
