@@ -8,6 +8,7 @@ class Oblig5ApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
