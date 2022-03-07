@@ -37,8 +37,8 @@ public class Compiler {
 
         Process run = Runtime.getRuntime().exec("docker run --rm cpp-compiler");
 
-        String runError = Arrays.toString(run.getErrorStream().readAllBytes());
-        String runOutput = Arrays.toString(run.getInputStream().readAllBytes());
+        String runError = new String(run.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
+        String runOutput = new String(run.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
 
         if (!runError.isBlank()) {
             return buildError + "\n" + runError;
