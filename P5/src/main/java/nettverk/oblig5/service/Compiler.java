@@ -18,8 +18,8 @@ public class Compiler {
         return null;
     }
 
-    public String compile(String code) throws IOException{
-        File myFile = new File("P5/src/main/temp/code.cpp");
+    public String compile(String code) throws IOException, InterruptedException {
+        File myFile = new File("src/docker/temp/yo.cpp");
         if (myFile.createNewFile()) {
             System.out.println("New file is created");
         } else {
@@ -31,14 +31,17 @@ public class Compiler {
         br.write(code);
         br.flush();
 
-        // Runtime.getRuntime().exec("docker rmi cpp-compiler");
-        Process process = Runtime.getRuntime().exec("docker build ./P5/ -t cpp-compiler");
-        String buildError = Arrays.toString(process.getErrorStream().readAllBytes());
+        // Runtime.getRuntime().exec("docker rmi cpp-compiler").waitFor();
+        Process process = Runtime.getRuntime().exec("docker build ./src/docker/ -t cpp-compiler");
+        String buildError = new String(process.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
+        System.out.println("builderror: "+ buildError);
 
         Process run = Runtime.getRuntime().exec("docker run --rm cpp-compiler");
 
         String runError = new String(run.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
         String runOutput = new String(run.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+
+        System.out.println("runoutput: " + runOutput);
 
         if (!runError.isBlank()) {
             return buildError + "\n" + runError;

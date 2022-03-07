@@ -24,7 +24,7 @@ public class CompilerController {
     public String compile(@RequestBody Code code) throws IOException, InterruptedException {
 
         String compiled = compiler.compile(code.getCode());
-        System.out.println("compiled" + compiled);
+        // System.out.println("compiled" + compiled);
 
         return compiled;
     }
