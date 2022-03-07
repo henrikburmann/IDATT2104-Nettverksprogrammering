@@ -6,24 +6,13 @@ document.getElementById("form").addEventListener("submit", function (event){
     const url = "http://localhost:8080/compile"
     const request = new XMLHttpRequest()
 
-    request.open("POST", url)
-
-    request.setRequestHeader("content-type", "application/json; charset=utf-8")
-
-    request.responseType = "json"
-
-    request.send(JSON.stringify({"code": code}))
-
-    request.onload = () => {
-        // document.getElementById("utskrevetKode").value = request.response.value["code"]
-        console.log(request.response.text)
-        console.log(request.valueOf())
-        console.log(request.response.value["code"])
-        console.log(request.response.text())
-        console.log(request.response.output)
-    }
-
-
-    console.log(code);
-
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"code": code})
+    }).then(response => response.text())
+        .then(text => document.getElementById("utskrevetKode").innerHTML = text);
 })

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.logging.Logger;
-
 
 @RestController
 public class CompilerController {
@@ -20,12 +20,10 @@ public class CompilerController {
 
     @PostMapping("/compile")
     @CrossOrigin
+    public String compile(@RequestBody Map<String, String> code) throws IOException, InterruptedException {
 
-    public String compile(@RequestBody Code code) throws IOException, InterruptedException {
-
-        String compiled = compiler.compile(code.getCode());
+        String compiled = compiler.compile(code);
         // System.out.println("compiled" + compiled);
-
         return compiled;
     }
 }
