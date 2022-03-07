@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 @Service
@@ -42,7 +43,6 @@ public class Compiler {
         if (!runError.isBlank()) {
             return buildError + "\n" + runError;
         }
-
         return runError + "\n" + runOutput;
     }
 }
