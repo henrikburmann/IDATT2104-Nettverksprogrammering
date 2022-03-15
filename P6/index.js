@@ -9,34 +9,68 @@ const generateAcceptValue = acceptKey =>
     .update(acceptKey + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11", "binary")
     .digest("base64");
 
-
+   
 // Simple HTTP server responds with a simple WebSocket client test
 const httpServer = net.createServer((connection) => {
   connection.on('data', () => {
     let content = `<!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="./style.css">    
     <meta charset="UTF-8" />
   </head>
   <body>
+    <style>
+        html{
+            background: #c5ebe6;
+        }
+       
+    </style>
     <script>
     let ws = new WebSocket('ws://localhost:3001');
     ws.onmessage = event => document.getElementById("ok").innerHTML = document.getElementById("ok").innerHTML + "</br> Friend: "+ event.data;
     const msg = () => {
       let v = document.getElementById("melding").value
       ws.send(v);
-      document.getElementById("ok").innerHTML = document.getElementById("ok").innerHTML + "</br> Me: "+ v;
+      document.getElementById("ok").innerHTML = document.getElementById("ok").innerHTML + "</br> Jeg: "+ v;
     }
     </script>
-    <h1>WebSocket test page</h1>
-    <label for="lname">Skriv melding:</label>
+    <h1>Nettverksprogrammering - Øving 6
+        <style>
+            h1{
+                text-align: center;
+            }
+        </style>
+    </h1>
+    <style>
+        
+    </style>
+    <div class = "skrivinn">
+    <label for="lname">Skriv inn</label>
     <input type="text" id="melding" name="melding"><br><br>
-    <input type="submit" value="Submit" onclick="return msg();">
+    <input type="submit" id="knapp" value="Send inn" onclick="return msg();">
+    
+    <style>
+            .skrivinn{
+                margin-left: 550px;
+            }
+            label{
+                display:block;
+            }
+            #melding{
+                width: 300px;
+                height: 100px;
+            }
+            #knapp{
+                width: 100px;
+                margin-left:100px;
+            }
+        
+    </style>
     <div id="ok" class="div">
     </div>
-    <div id="canvas">
-        <canvas id="tegnebrett" width="200" height="100" style="border:1px solid #000000></canvas>
     </div>
+   
   </body>
 </html>
 `;
@@ -84,7 +118,7 @@ const wsServer = net.createServer((connection) => {
         }
         console.log(melding);
         sendMeldingTilKlienter(melding, connection);
-    }
+    }   
   });
 
   const sendMeldingTilKlienter = (message, c) => {
